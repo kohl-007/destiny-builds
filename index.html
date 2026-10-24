@@ -166,7 +166,7 @@ button{font:inherit;color:inherit}
 .gc-i{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:800}.gc-row.ok .gc-i{background:color-mix(in srgb,#34C759 22%,transparent);color:#34C759}.gc-row.no .gc-i{background:color-mix(in srgb,#FF453A 18%,transparent);color:#FF6961}
 .gcopies{display:grid;gap:8px}.gcopy{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:10px 12px}.gch{display:flex;gap:8px;align-items:center;margin-bottom:8px}.gch b{font-size:14px}
 .chip.gsel{background:color-mix(in srgb,var(--tint) 22%,var(--fill));color:var(--fg);font-weight:600}.gcopy .chip{cursor:pointer;font-size:13px}
-.gstats{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px}.gstats span{background:var(--fill);border-radius:10px;padding:5px 4px;text-align:center}.gstats small{display:block;font-size:10.5px;color:var(--fg3)}.gstats b{font-size:14px}
+.gst6{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px}.gst6 span{background:var(--fill);border-radius:10px;padding:5px 4px;text-align:center}.gst6 small{display:block;font-size:10.5px;color:var(--fg3)}.gst6 b{font-size:14px}
 .ip-pc{position:relative}.ip-pc.own{border-color:color-mix(in srgb,#34C759 55%,transparent)}.pc-own{position:absolute;top:6px;right:6px;width:20px;height:20px;border-radius:50%;background:#34C759;color:#fff;font-size:12px;font-weight:800;display:grid;place-items:center}
 .gcard{display:flex;gap:14px;align-items:center;justify-content:space-between;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:14px 16px;margin-bottom:22px}.gcard b{display:block;font-size:16px}.gcard small{display:block;color:var(--fg2);font-size:13px;margin-top:2px}
 .utiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:22px}
@@ -1516,7 +1516,7 @@ details.wd[open]>summary{background:var(--fill)}
     return ipSec('Your weapons with it',h('div',{class:'plist'},L.slice(0,60).map(function(c){return itemRow('w',c.n,[ownerTxt(c.o),c.t].filter(Boolean).join(' · '));})),String(L.length)); }
   function gearArmorSec(name){ if(!hasGear()) return null; var cps=gearIdx().A[norm(name)]||[]; if(!cps.length) return ipSec('In your gear',h('p',{class:'note'},'You don’t have this one in your import.'));
     return ipSec('In your gear',h('div',{class:'gcopies'},cps.map(function(c){return h('div',{class:'gcopy'},h('div',{class:'gch'},h('b',null,ownerTxt(c.o)||'Unknown'),c.ar?h('span',{class:'tag'},c.ar):null,c.tot?h('span',{class:'tag'},'Total '+c.tot):null),
-      h('div',{class:'gstats'},STAT6.filter(function(s){return c.st&&c.st[s]!=null;}).map(function(s){return h('span',null,h('small',null,s),h('b',null,String(c.st[s])));})));})),String(cps.length)); }
+      h('div',{class:'gst6'},STAT6.filter(function(s){return c.st&&c.st[s]!=null;}).map(function(s){return h('span',null,h('small',null,s),h('b',null,String(c.st[s])));})));})),String(cps.length)); }
 
   /* ---------- You: gear status, nudges, add gear ---------- */
   function gearAgeDays(){ var a=S.gear&&S.gear.at; if(!a) return null; var d=(Date.now()-new Date(a+'T12:00:00').getTime())/864e5; return Math.max(0,Math.floor(d)); }
