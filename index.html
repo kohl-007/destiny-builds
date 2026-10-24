@@ -230,7 +230,7 @@ button{font:inherit;color:inherit}
 /* Build list */
 .split{display:block}
 .build-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:12px;margin:0;padding:0;list-style:none}
-.pick{all:unset;box-sizing:border-box;cursor:pointer;width:100%;display:grid;grid-template-columns:48px minmax(0,1fr) 18px;gap:14px;align-items:center;padding:14px 14px 14px 14px;
+.pick{all:unset;box-sizing:border-box;cursor:pointer;width:100%;display:grid;grid-template-columns:auto minmax(0,1fr) 18px;gap:14px;align-items:center;padding:14px 14px 14px 14px;
   background:var(--surface);border:1px solid var(--line);border-radius:var(--r-l);transition:transform var(--t-fast),border-color var(--t-fast),background var(--t-fast)}
 .pick:hover{border-color:var(--fill2)}
 .pick:active{transform:scale(.985)}
@@ -239,6 +239,12 @@ button{font:inherit;color:inherit}
 .glyph{width:48px;height:48px;border-radius:14px;background:#0D1017;color:var(--accent);display:grid;place-items:center;flex:none;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent) 38%,transparent)}
 .glyph svg{width:26px;height:26px}
 .glyph img{width:62%;height:62%;object-fit:contain;display:block}
+.glyph.thumb{position:relative;width:80px;height:48px;overflow:visible;background:#0D1017;box-shadow:none}
+.glyph.thumb>img{width:100%;height:100%;object-fit:cover;border-radius:12px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+.glyph.thumb .tbadge{position:absolute;right:-5px;bottom:-5px;width:22px;height:22px;border-radius:7px;background:#0D1017;display:grid;place-items:center;color:var(--accent);box-shadow:0 0 0 2px var(--surface),0 2px 6px rgba(0,0,0,.3)}
+.glyph.thumb .tbadge img{width:68%;height:68%;object-fit:contain}.glyph.thumb .tbadge svg{width:14px;height:14px}
+.prow .pi:has(.thumb){width:60px;height:36px;overflow:visible;background:none;border-radius:0}.prow .pi .glyph.thumb>img{width:100%;height:100%}
+.pi .glyph.thumb,.erec .glyph.thumb{width:60px;height:36px}.pi .glyph.thumb>img,.erec .glyph.thumb>img{border-radius:9px}.pi .glyph.thumb .tbadge,.erec .glyph.thumb .tbadge{width:18px;height:18px;border-radius:6px;right:-4px;bottom:-4px}
 .pick h3{margin:0;font-size:17px;line-height:1.25;font-weight:650;letter-spacing:-.01em}
 .pick .sub{color:var(--fg2);font-size:13.5px;margin:1px 0 7px}
 .tags{display:flex;flex-wrap:wrap;gap:6px}
@@ -415,7 +421,7 @@ button{font:inherit;color:inherit}
   .split{display:grid;grid-template-columns:minmax(300px,360px) minmax(0,1fr);gap:28px;align-items:start}
   .build-list{grid-template-columns:minmax(0,1fr);position:sticky;top:calc(env(safe-area-inset-top,0px) + 92px)}
   .pick .chev{display:none}
-  .pick{grid-template-columns:48px minmax(0,1fr)}
+  .pick{grid-template-columns:auto minmax(0,1fr)}
   .detail{position:static;inset:auto;transform:none;visibility:visible;background:none;overflow:visible;transition:none;min-width:0;z-index:auto}
   .detail::before{display:none}
   .detail-in{max-width:none;padding:0}
@@ -775,6 +781,11 @@ details.wd[open]>summary{background:var(--fill)}
   function norm(s){return String(s||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();}
   function elImg(el,cls){var im=h('img',{class:cls||null,src:ICON[el]||'',alt:'',draggable:'false'});im.addEventListener('error',function(){var f=ic(el);if(im.parentNode) im.parentNode.replaceChild(f,im);});return im;}
   function glyph(el){return h('span',{class:'glyph','aria-hidden':'true'},ICON[el]?elImg(el):ic(el));}
+  function ytId(u){ var m=String(u||'').match(/(?:youtu\.be\/|[?&]v=|\/shorts\/|\/embed\/)([A-Za-z0-9_-]{11})/); return m?m[1]:null; }
+  function bThumb(b,el){ var id=ytId(b.url)||ytId(arr(b.credits).map(function(c){return c.videoUrl;}).filter(Boolean)[0]); if(!id) return glyph(el);
+    var g=h('span',{class:'glyph thumb','aria-hidden':'true'}), img=h('img',{src:'https://i.ytimg.com/vi/'+id+'/mqdefault.jpg',alt:'',loading:'lazy',decoding:'async'});
+    img.addEventListener('error',function(){ var f=glyph(el); if(g.parentNode) g.parentNode.replaceChild(f,g); });
+    g.appendChild(img); g.appendChild(h('span',{class:'tbadge'},ICON[el]?elImg(el):ic(el))); return g; }
 
   var S={builds:[],ref:{},tab:'builds',sel:null,loaded:false,failed:false,
     f:{el:'all',cls:'all',q:''}, fav:'', favBar:false, favNone:false, e:{kind:'all',cls:'all',q:'',dm:'weapons',ty:'all',wt:'all',rar:'all',el:'all',lim:60}, r:{mode:'rank',cat:'clear',a:null,b:null}, l:{sec:'anatomy'}};
@@ -940,7 +951,7 @@ details.wd[open]>summary{background:var(--fill)}
       if(b.player) tags.push(h('span',{class:'tag'},'Works for '+b.player));
       RC.forEach(function(c){ if(rv(b,c.k)>=8) tags.push(h('span',{class:'tag role'},c.t)); });
       ul.appendChild(h('li',null,h('button',{type:'button',class:'pick','data-el':el,'data-id':b.id,'aria-current':b.id===S.sel?'true':'false',onclick:function(){selectBuild(b.id,true);}},
-        glyph(el),
+        bThumb(b,el),
         h('div',{style:'min-width:0'},h('h3',null,b.name||b.id),h('div',{class:'sub'},[b.cls,EL[el],b.super].filter(Boolean).join(' · ')),h('div',{class:'tags'},tags)),
         ic('chev','chev'))));
     });
@@ -1391,7 +1402,7 @@ details.wd[open]>summary{background:var(--fill)}
       h('span',{class:'pi'},pic(name)||h('span',{class:'d',style:'background:var(--fill2)'})),
       h('span',{class:'pt'},h('b',null,name),sub?h('small',null,sub):null),right||null,ic('chev','pch'));}
   function buildsBlock(name){var L=buildsUsing(name); if(!L.length) return null;
-    return ipSec('Used in your builds',h('div',{class:'erecs'},L.map(function(b){var el=elOf(b); return h('button',{type:'button',class:'erec',onclick:function(){closeItem(); setTab('builds'); setTimeout(function(){selectBuild(b.id,true);},140);}},glyph(el),h('span',null,h('b',null,b.name),h('small',null,[b.cls,EL[el]].filter(Boolean).join(' · '))),ic('chev','echev'));})),String(L.length));}
+    return ipSec('Used in your builds',h('div',{class:'erecs'},L.map(function(b){var el=elOf(b); return h('button',{type:'button',class:'erec',onclick:function(){closeItem(); setTab('builds'); setTimeout(function(){selectBuild(b.id,true);},140);}},bThumb(b,el),h('span',null,h('b',null,b.name),h('small',null,[b.cls,EL[el]].filter(Boolean).join(' · '))),ic('chev','echev'));})),String(L.length));}
   function exoPerkCard(name){var d=descOf(name); if(!d||!d.x) return null; return h('div',{class:'ip-exo'},h('b',null,d.x[0]),h('p',null,d.x[1]));}
 
   function renderItem(kd,key){
@@ -1472,7 +1483,7 @@ details.wd[open]>summary{background:var(--fill)}
       return; }
     var groups=[], N=5, go=function(kind){return function(){S.e.kind=kind;S.e.lim=60;eSegRepaint();renderExotics();};};
     var B=rankHits(S.builds,q,function(b){return [b.name,nm(b.exotic),b.cls,b.super].join(' ');});
-    groups.push(resGroup('Builds',B.slice(0,N).map(function(b){var el=elOf(b); return h('button',{type:'button',class:'prow',onclick:function(){setTab('builds');selectBuild(b.id,true);}},h('span',{class:'pi'},glyph(el)),h('span',{class:'pt'},h('b',null,b.name),h('small',null,[b.cls,EL[el],nm(b.exotic)].filter(Boolean).join(' · '))),ic('chev','pch'));}),B.length));
+    groups.push(resGroup('Builds',B.slice(0,N).map(function(b){var el=elOf(b); return h('button',{type:'button',class:'prow',onclick:function(){setTab('builds');selectBuild(b.id,true);}},h('span',{class:'pi'},bThumb(b,el)),h('span',{class:'pt'},h('b',null,b.name),h('small',null,[b.cls,EL[el],nm(b.exotic)].filter(Boolean).join(' · '))),ic('chev','pch'));}),B.length));
     var W=rankHits(arr(S.gdW),q,function(w){return w.n;});
     groups.push(resGroup('Weapons',W.slice(0,N).map(function(w){return itemRow('w',w.n,[w.tier==='Exotic'?'Exotic':null,w.el,w.t].filter(Boolean).join(' · '));}),W.length,go('weapons')));
     var XA=rankHits(exoArmorList(),q,function(a){return a.name;});
@@ -1909,7 +1920,7 @@ details.wd[open]>summary{background:var(--fill)}
           e.hp?h('div',{class:'ehpbox'},h('div',null,h('small',null,'Health'),h('b',null,e.hp.health)),h('div',null,h('small',null,'Effective'),h('b',null,e.hp.effective)),e.hp.note?h('p',null,e.hp.note):null):null,
           arr(e.wipes).length?h('div',null,h('div',{class:'k'},'Common wipes'),h('ul',{class:'ewipes'},arr(e.wipes).map(function(x){return h('li',null,x);}))):null,
           recs.length?h('div',null,h('div',{class:'k'},e.needs==='mechanic'?'Bring for add clear and survival':(e.needs==='proxy'?'Bring (supers and base damage count here)':'Bring for boss damage')),
-            h('div',{class:'erecs'},recs.map(function(b){var el=elOf(b); return h('button',{type:'button',class:'erec',onclick:function(){setTab('builds'); selectBuild(b.id,true);}},glyph(el),h('span',null,h('b',null,b.name),h('small',null,[b.cls,EL[el]].join(' · '))),ic('chev','chev'));}))):null));
+            h('div',{class:'erecs'},recs.map(function(b){var el=elOf(b); return h('button',{type:'button',class:'erec',onclick:function(){setTab('builds'); selectBuild(b.id,true);}},bThumb(b,el),h('span',null,h('b',null,b.name),h('small',null,[b.cls,EL[el]].join(' · '))),ic('chev','chev'));}))):null));
       if(i===0) d.open=true;
       rdBody.appendChild(d);});
     if(doc.source) rdBody.appendChild(h('p',{class:'note',style:'margin-top:14px'},doc.source));
@@ -2025,7 +2036,7 @@ details.wd[open]>summary{background:var(--fill)}
     var introSeg=seg([{v:'once',t:'First time only'},{v:'always',t:'Every time'},{v:'never',t:'Never'}],introAuto,function(v){try{localStorage.setItem('dbIntroAuto',v);}catch(e){}},'Play intro on open');
     sBody.appendChild(section('Intro',h('div',{class:'group'},h('div',{class:'srow'},h('div',{class:'l'},h('b',null,'Play intro on open'),h('small',null,'Remembered on this device.')),introSeg),h('div',{class:'srow'},h('div',{class:'l'},h('b',null,'Replay the intro'),h('small',null,'Plays the opening animation again. Sound needs a tap on a subclass.')),h('button',{type:'button',class:'sbtn',onclick:function(){setTab('builds');introShow();}},'Replay')))));
     if(hasGear()) sBody.appendChild(section('Your data',h('div',{class:'group'},h('div',{class:'srow'},h('div',{class:'l'},h('b',null,'Remove all gear'),h('small',null,'Clears your import and anything you added by hand from this device.')),h('button',{type:'button',class:'sbtn',onclick:function(){try{localStorage.removeItem('dbGear');}catch(e){} S.gear=null; S.gearIdx=null; renderSettings(); paintNudge(); if(S.sel) renderDetail();}},'Remove')))));
-    sBody.appendChild(section('About',h('div',{class:'group'},h('div',{class:'srow'},h('div',{class:'l'},h('b',null,'Destiny Builds Companion'),h('small',null,'Builds come from your group sheet and the creators credited on each build. Element icons are the in-game icons you supplied.'),h('small',null,'Version 2026.10.24 · stat tuner'))))));
+    sBody.appendChild(section('About',h('div',{class:'group'},h('div',{class:'srow'},h('div',{class:'l'},h('b',null,'Destiny Builds Companion'),h('small',null,'Builds come from your group sheet and the creators credited on each build. Element icons are the in-game icons you supplied.'),h('small',null,'Version 2026.10.24b · video thumbnails'))))));
   }
   /* ---------- Intro (animation + synthesized score, no audio files) ---------- */
   var INTRO_LEN=7.6;
