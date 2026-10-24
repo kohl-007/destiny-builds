@@ -528,6 +528,39 @@ button{font:inherit;color:inherit}
 .stile.set em{color:var(--accent)}
 @media (min-width:640px){.stile b{font-size:13px}.stile small,.stile em{font-size:11.5px}.stile .si{max-width:72px}}
 .gstats{padding:8px 16px}
+.tu-open{padding:4px 16px 14px}
+.tuner .tu-top{margin-bottom:6px}.tuner .tu-sec{margin:18px 4px 8px}
+.tu-row{padding:12px 16px}.tu-row+.tu-row{border-top:1px solid var(--line)}
+.tu-h{display:flex;align-items:center;gap:10px}.tu-i{width:24px;height:24px;filter:var(--stat-ico,none);opacity:.5;flex:none}.tu-row.on .tu-i{opacity:1}
+.tu-n{flex:1;font-size:15px;font-weight:600;display:flex;gap:8px;align-items:baseline}.tu-n small{font-size:11px;font-weight:650;text-transform:uppercase;letter-spacing:.05em;color:var(--accent,var(--tint-ink))}
+.tu-v{font-family:var(--f-mono);font-size:22px;font-weight:600;min-width:3ch;text-align:right}
+.tu-track{position:relative;margin:8px 0 4px}
+.tu-r{-webkit-appearance:none;appearance:none;width:100%;height:28px;background:transparent;margin:0;display:block;cursor:pointer;--p:50%}
+.tu-r::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:linear-gradient(90deg,var(--accent,var(--tint)) var(--p),var(--fill2) var(--p))}
+.tu-r::-moz-range-track{height:6px;border-radius:3px;background:var(--fill2)}.tu-r::-moz-range-progress{height:6px;border-radius:3px;background:var(--accent,var(--tint))}
+.tu-r::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;margin-top:-9px;background:#fff;border:.5px solid rgba(0,0,0,.08);box-shadow:0 2px 8px rgba(0,0,0,.22)}
+.tu-r::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:#fff;border:.5px solid rgba(0,0,0,.08);box-shadow:0 2px 8px rgba(0,0,0,.22)}
+.tu-r:focus{outline:none}.tu-r:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 3px var(--fill2),0 2px 8px rgba(0,0,0,.22)}
+.tu-mk{position:absolute;top:4px;width:2px;height:20px;margin-left:-1px;border-radius:1px;background:var(--fg3);pointer-events:none}
+.tu-fx{margin:2px 0 0;padding:0 0 0 34px;list-style:none;font-size:13px;color:var(--fg2);line-height:1.4}.tu-fx li+li{margin-top:2px}
+.tu-font{display:block;padding-left:34px;font-size:12px;color:var(--fg3);margin-top:3px}.tu-font:empty{display:none}.tu-font.warn{color:var(--warn)}
+.tu-act{display:flex;justify-content:flex-end;margin-top:10px}
+.tu-chg{padding:10px 16px}.tu-chg+.tu-chg{border-top:1px solid var(--line)}.tu-chg b{display:block;font-size:14px}.tu-chg small{display:block;font-size:13px;color:var(--fg2);margin-top:2px;line-height:1.4}
+.tu-empty{padding:14px 16px}.tu-empty p{margin:0 0 10px;color:var(--fg2);font-size:14px}
+.tu-head{padding:12px 16px 4px}.tu-head b{display:block;font-size:15px}.tu-head small{color:var(--fg3);font-size:12px}
+.tu-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;padding:8px 12px}
+.tu-p{background:var(--fill);border-radius:12px;padding:8px 6px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:2px;min-width:0}
+.tu-p .si{width:44px;height:44px;border-radius:8px;overflow:hidden;background:var(--fill2)}.tu-p .si img{width:100%;height:100%;object-fit:cover;display:block}
+.tu-p b{font-size:12px}.tu-p small{font-size:11px;color:var(--fg2);line-height:1.2;overflow-wrap:anywhere}.tu-p em{font-style:normal;font-size:10.5px;color:var(--fg3)}
+.tu-p.exo{background:var(--exo);color:var(--exo-ink)}.tu-p.exo small,.tu-p.exo em{color:var(--exo-ink);opacity:.75}.tu-p.miss{opacity:.6}.tu-p.none{justify-content:center;color:var(--fg3)}
+.tu-ps{display:flex;flex-wrap:wrap;justify-content:center;gap:2px 5px;margin-top:3px;font-family:var(--f-mono);font-size:10px;color:var(--fg2)}.tu-p.exo .tu-ps{color:var(--exo-ink)}
+.tu-bars{padding:8px 16px}
+.tu-bar{display:grid;grid-template-columns:70px minmax(0,1fr) 72px;gap:10px;align-items:center;padding:5px 0;font-size:13px}.tu-bar .k{font-weight:600}.tu-bar .v{font-family:var(--f-mono);text-align:right}.tu-bar.short .v{color:var(--warn)}
+.tb{position:relative;height:8px;border-radius:4px;background:var(--fill2)}.tb i{position:absolute;top:0;bottom:0;border-radius:4px}.tb .a{left:0;background:var(--accent,var(--tint))}.tb .f{background:repeating-linear-gradient(45deg,var(--accent,var(--tint)) 0 3px,transparent 3px 6px);opacity:.5}
+.tb .t{position:absolute;top:-4px;width:2px;height:16px;margin-left:-1px;background:var(--fg);border-radius:1px}
+.tu-mods{display:flex;gap:10px;align-items:center;padding:6px 16px 12px;flex-wrap:wrap}.tu-mods .chip img{width:16px;height:16px;filter:var(--stat-ico,none)}
+@media (max-width:520px){.tu-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.tu-bar{grid-template-columns:62px minmax(0,1fr) 84px;font-size:12.5px}}
+
 .gst{display:grid;grid-template-columns:64px 26px minmax(0,1fr);grid-template-rows:auto auto;column-gap:10px;align-items:center;padding:9px 0;color:var(--fg3)}
 .gst+.gst{border-top:1px solid var(--line)}
 .gst .gv{grid-row:1/3;text-align:right;font-family:var(--f-mono);font-size:26px;font-weight:600;letter-spacing:-.02em;line-height:1;overflow-wrap:anywhere}
@@ -891,7 +924,7 @@ details.wd[open]>summary{background:var(--fill)}
   }
   function renderList(){
     clear(listCol);
-    if(S.failed){listCol.appendChild(h('div',{class:'empty'},h('h3',null,'Builds unavailable'),h('p',null,'Open this page while signed in to claude.ai to load your builds.')));return;}
+    if(S.failed){listCol.appendChild(h('div',{class:'empty'},h('h3',null,'Builds unavailable'),h('p',null,'The builds data could not be read from this file. Try reloading.')));return;}
     if(!S.loaded){var sk=h('div',{class:'build-list','aria-busy':'true'});for(var i=0;i<3;i++) sk.appendChild(h('div',{class:'skel'}));listCol.appendChild(sk);return;}
     if(!S.builds.length){listCol.appendChild(h('div',{class:'empty'},h('h3',null,'No builds yet'),h('p',null,'Send Claude a YouTube or DIM link and the build shows up here.')));return;}
     var v=visible();
@@ -960,7 +993,7 @@ details.wd[open]>summary{background:var(--fill)}
     clear(detail); setTimeout(setDtop,0);
     var b=S.builds.filter(function(x){return x.id===S.sel;})[0], baseB=b, vsw=null;
     if(b&&arr(b.variants).length){ S.vsel=S.vsel||{}; var VS=arr(b.variants), vcur=S.vsel[b.id]||'main', vobj=VS.filter(function(v){return v.id===vcur;})[0];
-      if(vobj){ b=Object.assign({},b); ['exotic','weapons','armorSet','armorSource','subclass','super','mods','modNote','artifact','stats','statNote','archetype'].forEach(function(k){ if(vobj[k]!==undefined) b[k]=vobj[k]; }); }
+      if(vobj){ b=Object.assign({},b,{_vlabel:vobj.label}); ['exotic','weapons','armorSet','armorSource','subclass','super','mods','modNote','artifact','stats','statNote','archetype'].forEach(function(k){ if(vobj[k]!==undefined) b[k]=vobj[k]; }); }
       var vhost=h('div',{class:'rdseg'}); vhost.appendChild(seg([{v:'main',t:baseB.mainLabel||'Main'}].concat(VS.map(function(v){return {v:v.id,t:v.label};})),function(){return vcur;},function(v){S.vsel[baseB.id]=v; var sc=detail.scrollTop; renderDetail(); detail.scrollTop=sc;},'Loadout'));
       vsw=h('div',{class:'vsw glass'},h('div',{class:'vsw-k'},'Loadout'),vhost,h('p',{class:'vsw-when'},(vobj?vobj.when:baseB.mainWhen)||''));
       setTimeout(function(){fitSeg(vhost);},0); }
@@ -1002,7 +1035,7 @@ details.wd[open]>summary{background:var(--fill)}
           h('span',{class:'gv'+(String(shown).length>4?' long':'')},shown), svg, h('span',{class:'gn'},n, e&&e.rank?h('small',null,e.rank):null, fontNote(n,v)),
           h('div',{class:'gb','aria-hidden':'true'},h('i',{style:'width:'+(v!=null?v/2:0)+'%'})));}));
     }
-    var stats=arr(b.stats).length?section('Stats*',[h('div',{class:'group'},statRows()),h('p',{class:'note'},'* Targets to aim for. Get as close as you can; creators often run a little lower and the build still works. Stats max out at 200, and Font mods add bonus points only while you have Armor Charge, so any bonus that would push a stat past 200 is wasted.'),b.statNote?h('p',{class:'note'},b.statNote):null]):null;
+    var stats=arr(b.stats).length?section('Stats*',[h('div',{class:'group'},statRows()),h('p',{class:'note'},'* Targets to aim for. Get as close as you can; creators often run a little lower and the build still works. Stats max out at 200, and Font mods add bonus points only while you have Armor Charge, so any bonus that would push a stat past 200 is wasted.'),b.statNote?h('p',{class:'note'},b.statNote):null,h('div',{class:'tu-open'},h('button',{type:'button',class:'sbtn primary',onclick:function(){openTuner(b,FONTS);}},'Tune stats with my gear'))]):null;
     var sub=section('Subclass',h('div',{class:'group'},arr(b.subclass).map(function(r){return h('div',{class:'grow'},h('div',{class:'k'},r.label),h('div',{class:'chips'},arr(r.items).map(function(i){var n=nm(i), ps=/\s\/\s/.test(n)?n.split(/\s+\/\s+/):[n]; return ps.map(function(x,k){return [k?h('span',{class:'or'},'or'):null,h('span',{class:'chip'},pic(ps.length>1?x:i),x)];});})));})));
     var armorMeta=[];
     var SLOTS=['Helmet','Arms','Chest','Legs','Class'], SLN={Helmet:'Helmet',Arms:'Arms',Chest:'Chest',Legs:'Legs',Class:'Class item'};
@@ -1607,6 +1640,122 @@ details.wd[open]>summary{background:var(--fill)}
     var bar=h('div',{class:'dbar ip-bar'},h('div',{class:'glassbar glass'},h('button',{type:'button',class:'gbtn back','aria-label':'Close',onclick:function(){ipDepth=0; hideItem();}},ic('back'),h('span',null,'Done')),h('div',{class:'ttl'},'Add gear'),h('span',{style:'width:38px'})));
     var panel=h('div',{class:'ip-panel'},bar,body); ipage.appendChild(panel); ipage.hidden=false; document.body.classList.add('ip-lock'); requestAnimationFrame(function(){ipage.classList.add('on');}); paint(); }
 
+  /* ---------- Stat tuner: sliders, what changes, best armor from your gear ---------- */
+  var TSL=['Helmet','Arms','Chest','Legs','Class'];
+  var SLOT_NOUN=(function(){ var N={0:'helm helmet hood mask cover cowl casque crown visor head headpiece hat veil brow facade mandible breather gaze sight horn skull face battlecage lancecap skullfort sn0helm sn0mask',1:'gauntlets gauntlet gloves grips grasps grasp wraps sleeves guard reach reaches handguards mitts brawlers fists fist bracers vambraces grip hand hands pauldron control armlets palms embrace manacles',2:'plate robes robe vest chest cuirass chestpiece harness mail jacket coat raiment carapace vestment vestments tunic chassis armor hauberk suit chestplate engine',3:'greaves boots strides legs legguards leg treads tread steps stompees striders pants trousers sabatons slacks leggings walkers shoes stride spurs spur',4:'mark bond cloak cape wings cord sash shroud scarf'}, M={};
+    Object.keys(N).forEach(function(k){N[k].split(' ').forEach(function(w){M[w]=+k;});}); return M; })();
+  var SLOT_EXC=(function(){ var L=[["Astrocyte Verse","Blight Ranger","Celestial Nighthawk","Circuit Defender","Circuit Keeper","Circuit Runner","Dawn Chorus","Deimosuffusion","Eternal Warrior","Eye of Another World","Fallen Sunstar","Foetracer","Graviton Forfeit","Hardy's Calm","Kit Fox 1.5","Knucklehead Radar","Mantle of the Cormorant Blade","Mechanik 1.2","Mihaylova's Triumph","Mouth of Ur","Nezarec's Sin","Precious Scars","Qiao's Grin","Shadow's Mind","The Stag","Visage of the Flain","Willbreaker's Watch","Airhead Hood"],
+    ["ACD/0 Feedback Fence","Aeon Safe","Aeon Soul","Aeon Swift","Arms of Optimacy","Ashen Wake","Ballidorse Wrathweavers","Briarbinds","Citan's Ramparts","Claws of Ahamkara","Contraverse Hold","Dogged Gage","Eunoia","Getaway Artist","Icefall Mantle","Khepri's Sting","Kit Fox 2.1","Liar's Handshake","Mechaneer's Tricksleeves","Melas Panoplia","Mihaylova's Instruments","No Backup Plans","Oathkeeper","Ophidian Aspect","Point-Contact Cannon Brace","Qiao's Care","Second Chance","Shards of Galanor","Shinobu's Vow","Stronghold","Sunbracers","Synthoceps","Triton Vice","Ursa Furiosa","Winter's Guile","Wishful Ignorance","Wormgod Caress","Young Ahamkara's Spine"],
+    ["Actium War Rig","Adornment of the Flain","Arbor Warden","Armamentarium","Chasm of Yul","Chromatic Fire","Crest of Alpha Lupi","Dark Age Chestrig","Dark Age Overcoat","Darkhollow Chiton","Deathsinger's Mantle","Descending Echo Cage","Duster of the Cormorant Blade","Equitis Shade Rig","Farseeker's Intuition","Gifted Conviction","Hallowfire Heart","Hardcase Battleplate","Hardy's Journey","Hazardous Propulsion","Heart of Inmost Light","Hoarfrost-Z","Kabr's Wrath","Kit Fox 1.4","Lucky Raspberry","Mantle of Battle Harmony","Mataiodoxía","Mechanik 2.1","Mihaylova's Choice","Moirai","Moonfang-X7 Rig","Omnioculus","Ophidia Spathe","Phoenix Protocol","Qiao's Heart","Raiden Flux","Reverie Dawn Tabard","Sanguine Alchemy","Scales of the Flain","Severance Enclosure","Star-Crossed Heart","Starfire Protocol","Stormdancer's Brace","Symmetrists' Habit","TM-Moss Custom Duster","The Dragon's Shadow","The Outlander's Heart","The Sixth Coyote","Vesper of Radius","Willbreaker's Resolve","Wings of Sacred Dawn"],
+    ["Abeyant Leap","Antaeus Wards","Balance of Power","BrayTech Sn0Boots","BrayTech Sn0Treads","Claws of the Flain","Dark Age Legbraces","Deathsinger's Herald","Dunemarchers","Farseeker's March","Fortune's Favor","Fr0st-EE5","Gemini Jester","Geomag Stabilizers","Hardcase Stompers","Hooks of the Flain","Kit Fox 1.1","Leg Armor","Lion Rampant","Mihaylova's Path","Mk. 44 Stand Asides","Orpheus Rig","Path of Xol","Peacekeepers","Phoenix Cradle","Radiant Dance Machines","Rain of Fire","Secant Filaments","St0mp-EE5","Star-Crossed Footsteps","Star-Eater Scales","Swarmers","Symmetrists' Balance","TM-Earp Custom Chaps","Talons of the Flain","The Bombardiers","Warmind's Avatar Legplates"],
+    ["Anti-Hero Victory","Be Thy Champion","Be Thy Cipher","Be Thy Guide","Bone Circlet","Clandestine Maneuvers","Cobra's Hood","Darkhollow Mantle","Ere the End","Far Gone Hood","Fatum Praevaricator","Fragment of the Prime","Hardy's Orders","Homeward","Hood of Tallies","Judgement's Wrap","Light of the Great Prism","Lion's Pride","Mantle of Contests","Mantle of Efrideet","Massyrian's Draw","Medal Mantle","Memory of Cayde","Mihaylova's Tale","Pathfinder's Hood","Phoenix's Fire","Qiao's Passing","Relativism","Renegade Hood","Rite of Refusal","Serpent's Glory Mantle","Solipsism","Stagnatious Rebuke","Stoicism","Synaptic Construct","TM-Earp Custom Cloaked Stetson","Tethering Void","The Beyond"]], M={};
+    L.forEach(function(a,i){a.forEach(function(n){M[norm(n)]=i;});}); return M; })();
+  function slotOfName(n){ if(!n) return null; var k=norm(n); if(SLOT_EXC[k]!=null) return TSL[SLOT_EXC[k]];
+    var af=S.ref['exotics-full'], ex=arr(af&&af.armor).filter(function(x){return norm(x.name)===k;})[0]; if(ex&&ex.slot) return /class/i.test(ex.slot)?'Class':(/helm/i.test(ex.slot)?'Helmet':(/arm/i.test(ex.slot)?'Arms':(/chest/i.test(ex.slot)?'Chest':(/leg/i.test(ex.slot)?'Legs':null))));
+    var ws=String(n).replace(/\(.*?\)/g,'').toLowerCase().replace(/[^a-z0-9' -]/g,' ').trim().split(/\s+/);
+    for(var i=ws.length-1;i>=0;i--){ if(SLOT_NOUN[ws[i]]!=null) return TSL[SLOT_NOUN[ws[i]]]; } return null; }
+  function slotOfPiece(p){ var t=String(p.t||''); if(/helmet/i.test(t)) return 'Helmet'; if(/gauntlet/i.test(t)) return 'Arms'; if(/chest/i.test(t)) return 'Chest'; if(/leg/i.test(t)) return 'Legs'; if(/bond|cloak|mark|class/i.test(t)) return 'Class'; return slotOfName(p.n); }
+  /* what each stat does (Armor 3.0 values) */
+  function pct(x){ x=Math.round(x*10)/10; return (x%1?x.toFixed(1):String(x))+'%'; }
+  function statEffect(s,v){ v=Math.max(0,Math.min(200,v|0)); var lo=Math.min(v,100), hi=Math.max(0,v-100), L=[];
+    if(s==='Weapons'){ L.push(v?'+'+pct(lo*.15)+' primary/special and +'+pct(lo*.10)+' heavy damage vs regular enemies, faster reload and handling':'No weapon bonuses');
+      if(hi) L.push('+'+pct(hi*.15)+' primary/special and +'+pct(hi*.10)+' heavy damage vs bosses, and ammo bricks can give extra ammo'); }
+    else if(s==='Health'){ L.push(v?'Orbs heal '+Math.round(lo*.7)+' HP, '+pct(lo*.1)+' flinch resistance':'Nothing. Outside PvP that’s normal');
+      if(hi) L.push('Shields recharge up to '+pct(hi*.25)+' faster, +'+Math.round(hi*.2)+' shield HP vs enemies'); }
+    else if(s==='Super'){ L.push(v?'More Super energy from damage ('+lo+'% of the full bonus)':'Base Super gain only'); if(hi) L.push('+'+pct(hi*.45)+' Super damage'); }
+    else { var ab={Melee:'melee',Grenade:'grenade',Class:'class ability'}[s];
+      L.push(v?'Faster '+ab+' recharge ('+lo+'% of the full speed-up)':'Slowest '+ab+' recharge');
+      if(hi) L.push(s==='Class'?'Casting gives a '+Math.round(hi*.4)+' HP overshield':'+'+pct(hi*(s==='Melee'?.3:.65))+' '+ab+' damage'); }
+    return L; }
+  function targetsFor(b){ var T={}, R={}; STAT6.forEach(function(s){T[s]=0;});
+    function num(t){t=String(t||''); if(/max/i.test(t)) return 200; var m=t.match(/\d+/); return m?Math.min(200,Number(m[0])):null;}
+    arr(b.stats).forEach(function(st){ String(st.label||'').split(/\s*(?:,|\/|\band\b|\bor\b)\s*/i).forEach(function(pt){ pt=pt.trim().toLowerCase(); STAT6.forEach(function(n){ if(pt!==n.toLowerCase()||R[n]) return;
+      R[n]=st.rank||' '; var v=num(st.target); if(v==null) v=/primary|all/i.test(st.rank||'')?150:(/secondary/i.test(st.rank||'')?100:(/tertiary/i.test(st.rank||'')?60:0)); T[n]=v; }); }); });
+    return {T:T,R:R}; }
+  /* optimizer */
+  function tunerPool(b){ var cls=String(b.cls||'').toLowerCase(), G=S.gear||{}, L=[];
+    arr(G.a).concat(arr(G.m).filter(function(x){return x.k==='a';})).forEach(function(p){ var c=String(p.c||'').toLowerCase(); if(c&&c!=='any'&&cls&&c.indexOf(cls)<0) return;
+      var sl=slotOfPiece(p); if(!sl) return; var st={}, any=false; STAT6.forEach(function(s){var v=Number(p.st&&p.st[s])||0; st[s]=v; if(v) any=true;});
+      L.push({n:p.n,o:ownerTxt(p.o)||'',sl:sl,x:/exotic/i.test(p.r||'')||!!findExoArmor(norm(p.n)),st:st,has:any}); });
+    return L; }
+  function setIndex(b){ var AS=(S.ref['armor-sets']&&S.ref['armor-sets'].sets)||{}, cls=String(b.cls||'').toLowerCase(), M={};
+    Object.keys(AS).forEach(function(k){ var p=k.split('|'); if(p[1]!==cls) return; TSL.forEach(function(sl){ var x=AS[k][sl]; if(x&&x.n) M[norm(x.n)]=p[0]; }); }); return M; }
+  function pieceImg(n){ if(!S.pieceImg){ S.pieceImg={}; var AS=(S.ref['armor-sets']&&S.ref['armor-sets'].sets)||{}; Object.keys(AS).forEach(function(k){ TSL.forEach(function(sl){ var x=AS[k][sl]; if(x&&x.n&&x.i) S.pieceImg[norm(x.n)]=x.i; }); }); }
+    var i=S.pieceImg[norm(n)]; return i?h('img',{src:i,alt:'',loading:'lazy'}):pic(n); }
+  function optimize(b,T,W){ var pool=tunerPool(b), SI=setIndex(b), exoName=splitOpts(nm(b.exotic))[0]||'', exoKey=norm(String(exoName).replace(/\s*\(.*?\)\s*/g,' ')), exoSl=exoName?slotOfName(exoName):null;
+    var opts=parseSets(b.armorSet); if(!opts.length) opts=[null];
+    var exoCands=pool.filter(function(p){return exoKey&&norm(p.n)===exoKey;});
+    function val(p){ var v=0; STAT6.forEach(function(s){ v+=(T[s]>0?(W[s]||1):0)*Math.min(p.st[s],T[s]); }); return v; }
+    var exo=exoCands.sort(function(a,c){return val(c)-val(a);})[0]||(exoSl?{n:exoName,sl:exoSl,x:true,miss:true,st:{Health:0,Melee:0,Grenade:0,Super:0,Class:0,Weapons:0}}:null);
+    var free=TSL.filter(function(sl){return sl!==(exo&&exo.sl);});
+    var best=null, tries=0;
+    opts.forEach(function(opt){ var parts=opt?(opt.parts||[opt]):[];
+      var C={}; free.forEach(function(sl){ var L=pool.filter(function(p){return p.sl===sl&&!p.x;}); L.sort(function(a,c){return val(c)-val(a);});
+        var pick=L.slice(0,10); parts.forEach(function(pt){ if(pt.slots&&pt.slots.indexOf(sl)<0) return; var k=norm(pt.name); L.filter(function(p){return SI[norm(p.n)]===k;}).slice(0,4).forEach(function(p){ if(pick.indexOf(p)<0) pick.push(p); }); });
+        C[sl]=pick.length?pick:[null]; });
+      function score(sel){ var tot={}; STAT6.forEach(function(s){tot[s]=0;}); sel.forEach(function(p){ if(p) STAT6.forEach(function(s){tot[s]+=p.st[s];}); });
+        var mods=[], i, s, k; for(i=0;i<5;i++){ var bs=null, bv=0; for(k=0;k<STAT6.length;k++){ s=STAT6[k]; var d=Math.min(10,Math.max(0,T[s]-tot[s]))*(W[s]||1); if(d>bv){bv=d;bs=s;} } if(!bs) break; tot[bs]+=10; mods.push(bs); }
+        var miss=0; STAT6.forEach(function(s){ miss+=Math.max(0,T[s]-tot[s])*(W[s]||1); });
+        var setMiss=0; parts.forEach(function(pt){ var k2=norm(pt.name), have=sel.filter(function(p,j){ return p&&SI[norm(p.n)]===k2&&(!pt.slots||pt.slots.indexOf(p.sl)>=0); }).length; setMiss+=Math.max(0,pt.need-have); });
+        var sum=0; STAT6.forEach(function(s){sum+=tot[s];});
+        return {cost:miss+setMiss*400, miss:miss, setMiss:setMiss, tot:tot, mods:mods, sum:sum}; }
+      var lists=free.map(function(sl){return C[sl];}), idx=lists.map(function(){return 0;});
+      while(true){ var sel=lists.map(function(l,i){return l[idx[i]];}); tries++;
+        var r=score(sel.concat([exo])); if(!best||r.cost<best.cost-1e-9||(Math.abs(r.cost-best.cost)<1e-9&&r.sum>best.sum)){ r.sel=sel; r.opt=opt; best=r; }
+        var j=lists.length-1; while(j>=0){ idx[j]++; if(idx[j]<lists[j].length) break; idx[j]=0; j--; } if(j<0) break; } });
+    if(!best) return null; var bySlot={}; free.forEach(function(sl,i){ bySlot[sl]=best.sel[i]; }); if(exo) bySlot[exo.sl]=exo;
+    best.bySlot=bySlot; best.exo=exo; best.pool=pool.length; best.tries=tries; return best; }
+  function openTuner(b,FONTS){ hideTip(); closeMenu(); clear(ipage);
+    var base=targetsFor(b), T={}, W={}; STAT6.forEach(function(s){ T[s]=base.T[s]; W[s]=/primary|all/i.test(base.R[s]||'')?1.6:(/secondary/i.test(base.R[s]||'')?1.3:1); });
+    function fb(s){ var c=(FONTS||{})[s]||0; return c>=3?50:(c===2?40:(c===1?20:0)); }
+    var body=h('div',{class:'ip-body tuner'}), resHost=h('div'), chgHost=h('div'), timer=null, rows={};
+    function icon(s){ var SI=S.ref['stat-icons']&&S.ref['stat-icons'][s]; return SI&&SI.i?h('img',{class:'tu-i',src:SI.i,alt:''}):h('span',{class:'tu-i'}); }
+    function paintRow(s){ var R=rows[s]; R.val.textContent=String(T[s]); clear(R.fx); statEffect(s,T[s]).forEach(function(t){R.fx.appendChild(h('li',null,t));});
+      var f=fb(s); R.font.textContent=f?('+'+f+' from fonts with Armor Charge'+(T[s]+f>200?' · '+(T[s]+f-200)+' wasted over 200':'')):''; R.font.className='tu-font'+(f&&T[s]+f>200?' warn':'');
+      R.inp.style.setProperty('--p',(T[s]/2)+'%'); R.inp.setAttribute('aria-valuetext',T[s]+' '+s); }
+    function paintChanges(){ clear(chgHost); var L=[]; STAT6.forEach(function(s){ if(T[s]===base.T[s]) return; var a=statEffect(s,base.T[s]), c=statEffect(s,T[s]);
+        L.push(h('div',{class:'tu-chg'},h('b',null,s+' '+base.T[s]+' → '+T[s]),h('small',null,T[s]>base.T[s]?'Now: '+c.join('; '):'You lose: '+a.filter(function(x){return c.indexOf(x)<0;}).join('; ')+(c.length?'. Left: '+c.join('; '):'')))); });
+      if(!L.length){ chgHost.appendChild(h('p',{class:'note'},'These are the build’s targets. Drag a slider to see what changes.')); return; }
+      chgHost.appendChild(h('div',{class:'group'},L)); }
+    function paintRes(){ clear(resHost);
+      if(!hasGear()){ resHost.appendChild(h('div',{class:'group tu-empty'},h('p',null,'Import your armor from DIM or sign in with Bungie, and this shows the best 5 pieces you own for these numbers.'),h('div',{class:'pc-btns'},gearPicker(function(){paintRes();})))); return; }
+      var r=optimize(b,T,W); if(!r||!r.pool){ resHost.appendChild(h('div',{class:'group tu-empty'},h('p',null,'None of your imported armor fits a '+b.cls+'. Import armor for that class and try again.'))); return; }
+      var tiles=TSL.map(function(sl){ var p=r.bySlot[sl], lbl=sl==='Class'?'Class item':sl;
+        if(!p) return h('div',{class:'tu-p none'},h('b',null,lbl),h('small',null,'Nothing for this slot'));
+        return h('div',{class:'tu-p'+(p.x?' exo':'')+(p.miss?' miss':'')},h('div',{class:'si'},pieceImg(p.n)||h('span',{class:'ph'})),h('b',null,lbl),h('small',null,p.n),
+          p.miss?h('em',null,'You don’t have it'):h('em',null,p.o||(p.x?'Exotic':'')),
+          p.miss?null:h('div',{class:'tu-ps'},STAT6.filter(function(s){return p.st[s];}).map(function(s){return h('span',null,s.slice(0,3)+' '+p.st[s]);}))); });
+      var bars=STAT6.map(function(s){ var got=r.tot[s], f=fb(s), short=Math.max(0,T[s]-got);
+        return h('div',{class:'tu-bar'+(short?' short':'')},h('span',{class:'k'},s),h('div',{class:'tb'},h('i',{class:'a',style:'width:'+Math.min(100,got/2)+'%'}),f?h('i',{class:'f',style:'left:'+Math.min(100,got/2)+'%;width:'+Math.max(0,Math.min(100,(got+f)/2)-Math.min(100,got/2))+'%'}):null,T[s]?h('b',{class:'t',style:'left:'+(T[s]/2)+'%'}):null),
+          h('span',{class:'v'},String(got)+(short?' (−'+short+')':''))); });
+      var modC={}; r.mods.forEach(function(s){modC[s]=(modC[s]||0)+1;});
+      var setLine=null; if(r.opt){ var parts=r.opt.parts||[r.opt]; setLine=parts.map(function(pt){ var k=norm(pt.name), SI=setIndex(b), have=TSL.filter(function(sl){var p=r.bySlot[sl]; return p&&!p.miss&&SI[norm(p.n)]===k;}).length; return pt.name+' '+Math.min(have,pt.need)+'/'+pt.need+(have>=pt.need?' ✓':''); }).join(' · '); }
+      var short=STAT6.filter(function(s){return r.tot[s]<T[s];});
+      resHost.appendChild(h('div',{class:'group'},
+        h('div',{class:'tu-head'},h('b',null,short.length?'Closest you can get with your gear':'Your gear hits every target'),h('small',null,(setLine?setLine+' · ':'')+'from '+r.pool+' '+b.cls+' pieces')),
+        h('div',{class:'tu-grid'},tiles),
+        h('div',{class:'tu-bars'},bars),
+        r.mods.length?h('div',{class:'tu-mods'},h('span',{class:'k'},'Stat mods'),h('div',{class:'chips'},Object.keys(modC).map(function(s){return h('span',{class:'chip'},icon(s),(modC[s]>1?modC[s]+'× ':'')+s+' Mod (+10)');}))):null,
+        r.exo&&r.exo.miss?h('p',{class:'note',style:'padding:0 16px'},'You don’t have '+r.exo.n+' in your import, so its slot counts as 0 here.'):null,
+        short.length?h('p',{class:'note',style:'padding:0 16px 12px'},'Short on '+short.join(', ')+'. Lower those sliders, or farm pieces with them as the primary stat.'):null)); }
+    function refresh(){ clearTimeout(timer); timer=setTimeout(function(){ paintChanges(); paintRes(); },140); }
+    body.appendChild(h('div',{class:'tu-top'},h('h2',{class:'ag-h'},'Stat tuner'),h('p',{class:'note'},b.name+(b._vlabel?' · '+b._vlabel:'')+'. Set the stats you want and see what they do, then the best armor you own for them.')));
+    body.appendChild(h('div',{class:'k tu-sec'},'Your targets'));
+    body.appendChild(h('div',{class:'group tu-sliders'},STAT6.map(function(s){
+      var inp=h('input',{type:'range',min:'0',max:'200',step:'5',value:String(T[s]),'aria-label':s+' target',class:'tu-r'}), val=h('b',{class:'tu-v'}), fx=h('ul',{class:'tu-fx'}), font=h('small',{class:'tu-font'});
+      rows[s]={inp:inp,val:val,fx:fx,font:font};
+      inp.addEventListener('input',function(){ T[s]=Number(inp.value)||0; paintRow(s); refresh(); });
+      var mark=base.T[s]?h('i',{class:'tu-mk',style:'left:calc('+(base.T[s]/2)+'% + '+(9-base.T[s]*.09)+'px)',title:'Build target'}):null;
+      return h('div',{class:'tu-row'+(base.R[s]?' on':'')},h('div',{class:'tu-h'},icon(s),h('span',{class:'tu-n'},s,(base.R[s]||'').trim()?h('small',null,base.R[s]):null),val),h('div',{class:'tu-track'},inp,mark),fx,font); })));
+    body.appendChild(h('div',{class:'tu-act'},h('button',{type:'button',class:'sbtn',onclick:function(){ STAT6.forEach(function(s){T[s]=base.T[s]; rows[s].inp.value=String(T[s]); paintRow(s);}); refresh(); }},'Reset to the build')));
+    body.appendChild(h('div',{class:'k tu-sec'},'What changes'));
+    body.appendChild(chgHost);
+    body.appendChild(h('div',{class:'k tu-sec'},'Best armor from your gear'));
+    body.appendChild(resHost);
+    body.appendChild(h('p',{class:'note'},'Effects use Armor 3.0 numbers: 0–100 mostly speeds up recharge, 101–200 adds damage. Totals use the stats in your import plus five +10 stat mods, one per piece. Fonts only count while you have Armor Charge.'));
+    STAT6.forEach(paintRow); paintChanges(); paintRes();
+    var bar=h('div',{class:'dbar ip-bar'},h('div',{class:'glassbar glass'},h('button',{type:'button',class:'gbtn back','aria-label':'Close',onclick:function(){ipDepth=0; hideItem();}},ic('back'),h('span',null,'Done')),h('div',{class:'ttl'},'Stat tuner'),h('span',{style:'width:38px'})));
+    var panel=h('div',{class:'ip-panel'},bar,body); ipage.appendChild(panel); ipage.hidden=false; document.body.classList.add('ip-lock'); requestAnimationFrame(function(){ipage.classList.add('on');}); }
   /* ---------- Sign in with Bungie (web version only) ---------- */
   var BN={key:'25fde0edd57c40088adcd7782c5fd228',client:'56151',redirect:'https://kohl-007.github.io/destiny-builds/',origin:'https://kohl-007.github.io',api:'https://www.bungie.net/Platform'};
   function bnAvailable(){ try{ if(location.origin===BN.origin) return true; return localStorage.getItem('dbBnTest')==='1'; }catch(e){ return false; } }
@@ -1876,7 +2025,7 @@ details.wd[open]>summary{background:var(--fill)}
     var introSeg=seg([{v:'once',t:'First time only'},{v:'always',t:'Every time'},{v:'never',t:'Never'}],introAuto,function(v){try{localStorage.setItem('dbIntroAuto',v);}catch(e){}},'Play intro on open');
     sBody.appendChild(section('Intro',h('div',{class:'group'},h('div',{class:'srow'},h('div',{class:'l'},h('b',null,'Play intro on open'),h('small',null,'Remembered on this device.')),introSeg),h('div',{class:'srow'},h('div',{class:'l'},h('b',null,'Replay the intro'),h('small',null,'Plays the opening animation again. Sound needs a tap on a subclass.')),h('button',{type:'button',class:'sbtn',onclick:function(){setTab('builds');introShow();}},'Replay')))));
     if(hasGear()) sBody.appendChild(section('Your data',h('div',{class:'group'},h('div',{class:'srow'},h('div',{class:'l'},h('b',null,'Remove all gear'),h('small',null,'Clears your import and anything you added by hand from this device.')),h('button',{type:'button',class:'sbtn',onclick:function(){try{localStorage.removeItem('dbGear');}catch(e){} S.gear=null; S.gearIdx=null; renderSettings(); paintNudge(); if(S.sel) renderDetail();}},'Remove')))));
-    sBody.appendChild(section('About',h('div',{class:'group'},h('div',{class:'srow'},h('div',{class:'l'},h('b',null,'Destiny Builds Companion'),h('small',null,'Builds come from your group sheet and the creators credited on each build. Element icons are the in-game icons you supplied.'))))));
+    sBody.appendChild(section('About',h('div',{class:'group'},h('div',{class:'srow'},h('div',{class:'l'},h('b',null,'Destiny Builds Companion'),h('small',null,'Builds come from your group sheet and the creators credited on each build. Element icons are the in-game icons you supplied.'),h('small',null,'Version 2026.10.24 · stat tuner'))))));
   }
   /* ---------- Intro (animation + synthesized score, no audio files) ---------- */
   var INTRO_LEN=7.6;
