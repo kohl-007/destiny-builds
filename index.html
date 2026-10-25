@@ -151,6 +151,7 @@ button{font:inherit;color:inherit}
 .vsw{border-radius:20px;padding:12px 12px 10px;margin:0 0 14px;display:grid;gap:8px}.vsw-k{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--fg3);padding:0 4px}.vsw-when{margin:0;padding:0 4px;font-size:13.5px;color:var(--fg2);line-height:1.4}
 .nudge{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;border-radius:22px;padding:14px 16px;margin:0 0 16px}.nudge .nd-t{min-width:0;flex:1 1 220px}.nudge b{display:block;font-size:15.5px}.nudge small{display:block;color:var(--fg2);font-size:13px;margin-top:2px}.nudge .nd-b{display:flex;gap:8px;align-items:center}
 .nudge.warn{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--exo) 45%,transparent),var(--glass-shadow)}
+.pc-av.img{overflow:hidden;background:var(--fill2)}.pc-av.img img{width:100%;height:100%;object-fit:cover;display:block}.pc-name{display:block;font-size:22px;font-weight:700;letter-spacing:-.01em;overflow-wrap:anywhere}.pc-code{font-size:15px;font-weight:600;color:var(--fg3);margin-left:2px}.pc-bn{color:var(--fg3)}.pc-bn.live{color:var(--ok)}
 .pcard{border-radius:26px;padding:18px;margin-bottom:22px;display:grid;gap:14px}.pc-top{display:flex;gap:14px;align-items:center}.pc-av{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:var(--fill2);flex:none}.pc-av svg{width:30px;height:30px;color:var(--fg2)}
 .pc-top b{display:block;font-size:20px;letter-spacing:-.01em}.pc-top small{display:block;color:var(--fg2);font-size:13.5px;margin-top:2px}.pc-top small.stale{color:var(--exo)}
 .pc-btns{display:flex;gap:8px;flex-wrap:wrap}.pc-bungie.on{gap:10px}.pc-bungie.on .bn-who b{display:block;font-size:15px;color:var(--fg)}.pc-bungie.on .bn-who small{display:block;color:var(--fg2);font-size:13px;margin-top:2px}.pc-bungie .bn-msg{color:var(--exo);font-size:13px}
@@ -1601,7 +1602,11 @@ details.wd[open]>summary{background:var(--fill)}
     var status=(nw||na)?(nw+' weapons · '+na+' armor'+(nm_?' · '+nm_+' added by hand':'')):(nm_?nm_+' added by hand':'No gear imported yet');
     var sub=(nw||na)?(age===0?'Updated today':(age===1?'Updated yesterday':'Updated '+age+' days ago'))+(age>=30?' — time for a refresh':''):'Import from DIM on a computer: Settings → Spreadsheets → Weapons and Armor.';
     return h('div',{class:'pcard glass'},
-      h('div',{class:'pc-top'},h('span',{class:'pc-av'},ic('you')),h('div',null,h('b',null,'Guardian'),h('small',null,status),h('small',{class:age>=30?'stale':null},sub))),
+      (function(){ var who=bnAvailable()?bnSignedName():null, av=h('span',{class:'pc-av'},ic('you'));
+        if(who&&G.av&&/^https:\/\/www\.bungie\.net\//.test(G.av)){ var im=h('img',{src:G.av,alt:'',referrerpolicy:'no-referrer'}); im.addEventListener('error',function(){ clear(av); av.appendChild(ic('you')); av.classList.remove('img'); }); clear(av); av.appendChild(im); av.classList.add('img'); }
+        var hm=who?String(who).match(/^(.*?)(#\d+)$/):null;
+        var title=who?h('b',{class:'pc-name'},hm?hm[1]:who,hm?h('span',{class:'pc-code'},hm[2]):null):h('b',null,'Guardian');
+        return h('div',{class:'pc-top'},av,h('div',{style:'min-width:0'},title,who?h('small',{class:'pc-bn'+(bnTok()?' live':'')},bnTok()?'Signed in with Bungie':'Bungie sign-in expired · refresh to update'):null,h('small',null,status),h('small',{class:age>=30?'stale':null},sub))); })(),
       h('div',{class:'pc-btns'},gearPicker(function(){renderSettings(); paintNudge();}),h('button',{type:'button',class:'sbtn',onclick:function(){openAddGear('w');}},'Add gear')),
       bnBlock());
   }
@@ -1780,7 +1785,7 @@ details.wd[open]>summary{background:var(--fill)}
   function bnSignedName(){ return (S.gear&&S.gear.src==='bungie'&&S.gear.who)||null; }
   function bnSignIn(){ var st=Math.random().toString(36).slice(2)+Date.now().toString(36); try{sessionStorage.setItem('dbBnState',st); localStorage.setItem('dbBnState',st);}catch(e){}
     location.href='https://www.bungie.net/en/OAuth/Authorize?client_id='+encodeURIComponent(BN.client)+'&response_type=code&state='+encodeURIComponent(st); }
-  function bnSignOut(){ try{localStorage.removeItem('dbBnTok');}catch(e){} if(S.gear&&S.gear.src==='bungie'){ var G=S.gear; delete G.src; delete G.who; saveGear(G);} toast('Signed out of Bungie. Your loaded gear stays until you remove it.'); if(S.tab==='settings') renderSettings(); }
+  function bnSignOut(){ try{localStorage.removeItem('dbBnTok');}catch(e){} if(S.gear&&S.gear.src==='bungie'){ var G=S.gear; delete G.src; delete G.who; delete G.av; saveGear(G);} toast('Signed out of Bungie. Your loaded gear stays until you remove it.'); if(S.tab==='settings') renderSettings(); }
   function bnStatus(msg){ S.bnMsg=msg; if(S.tab==='settings') renderSettings(); }
   function bnCall(path){ var t=bnTok(); if(!t) return Promise.reject({auth:true,message:'Your Bungie sign-in expired.'});
     return fetch(BN.api+path,{headers:{'X-API-Key':BN.key,'Authorization':'Bearer '+t.t}}).then(function(r){ if(r.status===401) throw {auth:true,message:'Your Bungie sign-in expired.'}; return r.json(); })
@@ -1819,8 +1824,8 @@ details.wd[open]>summary{background:var(--fill)}
     bnCall('/User/GetMembershipsForCurrentUser/').then(function(R){ var ms=arr(R.destinyMemberships); if(!ms.length) throw {message:'No Destiny 2 account is linked to this Bungie account.'};
       var m=ms.filter(function(x){return R.primaryMembershipId&&x.membershipId===R.primaryMembershipId;})[0]||ms.filter(function(x){return x.crossSaveOverride===x.membershipType;})[0]||ms[0];
       var who=(R.bungieNetUser&&(R.bungieNetUser.uniqueName||R.bungieNetUser.displayName))||m.bungieGlobalDisplayName||m.displayName||'Guardian';
-      return bnCall('/Destiny2/'+m.membershipType+'/Profile/'+m.membershipId+'/?components=100,102,200,201,205,300,304,305,310').then(function(P){return {P:P,who:who};}); })
-    .then(function(x){ var g=bnGearFromProfile(x.P,M); var G={w:g.w,a:g.a,m:(S.gear&&S.gear.m)||[],at:new Date().toISOString().slice(0,10),src:'bungie',who:x.who};
+      return bnCall('/Destiny2/'+m.membershipType+'/Profile/'+m.membershipId+'/?components=100,102,200,201,205,300,304,305,310').then(function(P){ var pp=R.bungieNetUser&&R.bungieNetUser.profilePicturePath, av=pp?(/^https?:/.test(pp)?pp:'https://www.bungie.net'+pp):null; return {P:P,who:who,av:av};}); })
+    .then(function(x){ var g=bnGearFromProfile(x.P,M); var G={w:g.w,a:g.a,m:(S.gear&&S.gear.m)||[],at:new Date().toISOString().slice(0,10),src:'bungie',who:x.who,av:x.av||(S.gear&&S.gear.av)||null};
       var names={}; G.w.forEach(function(i){names['w'+norm(i.n)]=1;}); G.a.forEach(function(i){names['a'+norm(i.n)]=1;}); G.m=arr(G.m).filter(function(i){return !names[i.k+norm(i.n)];});
       saveGear(G); S.bnMsg=null; bnPill(null); toast(opt.quiet?'Gear updated from Bungie':'Loaded '+g.w.length+' weapons and '+g.a.length+' armor pieces'); if(S.tab==='settings') renderSettings(); paintNudge(); if(S.sel) renderDetail(); })
     .catch(function(e){ bnPill(null); var msg=(e&&e.message)||'Couldn’t reach Bungie.'; if(e&&e.auth){ try{localStorage.removeItem('dbBnTok');}catch(_){} msg+=' Tap Sign in with Bungie.'; } bnStatus(msg); toast(msg); }); }
@@ -1840,7 +1845,7 @@ details.wd[open]>summary{background:var(--fill)}
   function bnBlock(){ if(!bnAvailable()) return h('div',{class:'pc-bungie'},h('span',null,'Sign in with Bungie'),h('small',null,'Works on the web version at kohl-007.github.io/destiny-builds. It loads your vault and characters automatically.'));
     var who=bnSignedName(), live=!!bnTok();
     return h('div',{class:'pc-bungie on'},
-      who?h('div',{class:'bn-who'},h('b',null,'Bungie: '+who),h('small',null,live?'Signed in':'Sign in again to refresh (sign-ins last about an hour)')):h('div',{class:'bn-who'},h('b',null,'Sign in with Bungie'),h('small',null,'Loads your vault and characters automatically, with every roll and stat.')),
+      who?null:h('div',{class:'bn-who'},h('b',null,'Sign in with Bungie'),h('small',null,'Loads your vault and characters automatically, with every roll and stat.')),
       S.bnMsg?h('small',{class:'bn-msg'},S.bnMsg):null,
       who?h('div',{class:'bn-auto'},h('div',{class:'l'},h('b',null,'Refresh when I open the app'),h('small',null,'Reloads your vault each time you open it. If your sign-in has expired, it quickly goes through Bungie and back.')),
         seg([{v:'1',t:'On'},{v:'0',t:'Off'}],function(){return bnAutoOn()?'1':'0';},function(v){try{localStorage.setItem('dbBnAuto',v);}catch(e){}},'Refresh when I open the app')):null,
@@ -2058,7 +2063,7 @@ details.wd[open]>summary{background:var(--fill)}
     var introSeg=seg([{v:'once',t:'First time only'},{v:'always',t:'Every time'},{v:'never',t:'Never'}],introAuto,function(v){try{localStorage.setItem('dbIntroAuto',v);}catch(e){}},'Play intro on open');
     sBody.appendChild(section('Intro',h('div',{class:'group'},h('div',{class:'srow'},h('div',{class:'l'},h('b',null,'Play intro on open'),h('small',null,'Remembered on this device.')),introSeg),h('div',{class:'srow'},h('div',{class:'l'},h('b',null,'Replay the intro'),h('small',null,'Plays the opening animation again. Sound needs a tap on a subclass.')),h('button',{type:'button',class:'sbtn',onclick:function(){setTab('builds');introShow();}},'Replay')))));
     if(hasGear()) sBody.appendChild(section('Your data',h('div',{class:'group'},h('div',{class:'srow'},h('div',{class:'l'},h('b',null,'Remove all gear'),h('small',null,'Clears your import and anything you added by hand from this device.')),h('button',{type:'button',class:'sbtn',onclick:function(){try{localStorage.removeItem('dbGear');}catch(e){} S.gear=null; S.gearIdx=null; renderSettings(); paintNudge(); if(S.sel) renderDetail();}},'Remove')))));
-    sBody.appendChild(section('About',h('div',{class:'group'},h('div',{class:'srow'},h('div',{class:'l'},h('b',null,'Destiny Builds Companion'),h('small',null,'Builds come from your group sheet and the creators credited on each build. Element icons are the in-game icons you supplied.'),h('small',null,'Version 2026.10.25 · Bungie refresh on open'))))));
+    sBody.appendChild(section('About',h('div',{class:'group'},h('div',{class:'srow'},h('div',{class:'l'},h('b',null,'Destiny Builds Companion'),h('small',null,'Builds come from your group sheet and the creators credited on each build. Element icons are the in-game icons you supplied.'),h('small',null,'Version 2026.10.25b · Bungie profile'))))));
   }
   /* ---------- Intro (animation + synthesized score, no audio files) ---------- */
   var INTRO_LEN=7.6;
