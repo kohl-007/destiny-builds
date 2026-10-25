@@ -152,6 +152,12 @@ button{font:inherit;color:inherit}
 .nudge{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;border-radius:22px;padding:14px 16px;margin:0 0 16px}.nudge .nd-t{min-width:0;flex:1 1 220px}.nudge b{display:block;font-size:15.5px}.nudge small{display:block;color:var(--fg2);font-size:13px;margin-top:2px}.nudge .nd-b{display:flex;gap:8px;align-items:center}
 .nudge.warn{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--exo) 45%,transparent),var(--glass-shadow)}
 .pc-av.img{overflow:hidden;background:var(--fill2)}.pc-av.img img{width:100%;height:100%;object-fit:cover;display:block}.pc-name{display:block;font-size:22px;font-weight:700;letter-spacing:-.01em;overflow-wrap:anywhere}.pc-code{font-size:15px;font-weight:600;color:var(--fg3);margin-left:2px}.pc-bn{color:var(--fg3)}.pc-bn.live{color:var(--ok)}
+.pc-tap{all:unset;box-sizing:border-box;cursor:pointer;width:100%;border-radius:18px;margin:-6px;padding:6px;width:calc(100% + 12px);-webkit-tap-highlight-color:transparent}
+.pc-tap:active{background:var(--fill)}.pc-tap:focus-visible{box-shadow:0 0 0 3px var(--fill2)}
+.pc-chev{width:18px;height:18px;flex:none;color:var(--fg3);transform:rotate(90deg);transition:transform var(--t-med) var(--spring)}.pc-tap[aria-expanded=true] .pc-chev{transform:rotate(-90deg)}
+.pc-more .pc-bungie{padding-bottom:14px;border-bottom:1px solid var(--line)}
+.pc-more{display:grid;grid-template-rows:0fr;transition:grid-template-rows var(--t-med) var(--spring),margin var(--t-med) var(--spring);margin-top:-14px}.pc-more.open{grid-template-rows:1fr;margin-top:0}.pc-more-in{overflow:hidden;min-height:0}
+@media (prefers-reduced-motion:reduce){.pc-more,.pc-chev{transition:none}}
 .pcard{border-radius:26px;padding:18px;margin-bottom:22px;display:grid;gap:14px}.pc-top{display:flex;gap:14px;align-items:center}.pc-av{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:var(--fill2);flex:none}.pc-av svg{width:30px;height:30px;color:var(--fg2)}
 .pc-top b{display:block;font-size:20px;letter-spacing:-.01em}.pc-top small{display:block;color:var(--fg2);font-size:13.5px;margin-top:2px}.pc-top small.stale{color:var(--exo)}
 .pc-btns{display:flex;gap:8px;flex-wrap:wrap}.pc-bungie.on{gap:10px}.pc-bungie.on .bn-who b{display:block;font-size:15px;color:var(--fg)}.pc-bungie.on .bn-who small{display:block;color:var(--fg2);font-size:13px;margin-top:2px}.pc-bungie .bn-msg{color:var(--exo);font-size:13px}
@@ -1606,9 +1612,13 @@ details.wd[open]>summary{background:var(--fill)}
         if(who&&G.av&&/^https:\/\/www\.bungie\.net\//.test(G.av)){ var im=h('img',{src:G.av,alt:'',referrerpolicy:'no-referrer'}); im.addEventListener('error',function(){ clear(av); av.appendChild(ic('you')); av.classList.remove('img'); }); clear(av); av.appendChild(im); av.classList.add('img'); }
         var hm=who?String(who).match(/^(.*?)(#\d+)$/):null;
         var title=who?h('b',{class:'pc-name'},hm?hm[1]:who,hm?h('span',{class:'pc-code'},hm[2]):null):h('b',null,'Guardian');
+        if(who){ var btn=h('button',{type:'button',class:'pc-top pc-tap','aria-expanded':S.pcOpen?'true':'false','aria-controls':'pcMore',onclick:function(){ S.pcOpen=!S.pcOpen; btn.setAttribute('aria-expanded',S.pcOpen?'true':'false'); var m=$('pcMore'); if(m) m.classList.toggle('open',!!S.pcOpen); }},
+            av,h('div',{style:'min-width:0;flex:1'},title,h('small',{class:'pc-bn'+(bnTok()?' live':'')},bnTok()?'Signed in with Bungie':'Bungie sign-in expired · refresh to update'),h('small',null,status),h('small',{class:age>=30?'stale':null},sub)),ic('chev','pc-chev'));
+          return btn; }
         return h('div',{class:'pc-top'},av,h('div',{style:'min-width:0'},title,who?h('small',{class:'pc-bn'+(bnTok()?' live':'')},bnTok()?'Signed in with Bungie':'Bungie sign-in expired · refresh to update'):null,h('small',null,status),h('small',{class:age>=30?'stale':null},sub))); })(),
+      (bnAvailable()&&bnSignedName())?h('div',{id:'pcMore',class:'pc-more'+(S.pcOpen?' open':'')},h('div',{class:'pc-more-in'},bnBlock())):null,
       h('div',{class:'pc-btns'},gearPicker(function(){renderSettings(); paintNudge();}),h('button',{type:'button',class:'sbtn',onclick:function(){openAddGear('w');}},'Add gear')),
-      bnBlock());
+      (bnAvailable()&&bnSignedName())?null:bnBlock());
   }
   function setOwned(st,cls){ var pcs=st.by[cls]; if(!pcs||!hasGear()) return null; var I=gearIdx(); var got=SLOTS.filter(function(sl){var p=pcs[sl]; return p&&I.A[norm(p.n)];}); return got; }
   function setProgress(){ if(!hasGear()) return null; var host=h('div',null); var cls=S.spCls||'Warlock';
@@ -2063,7 +2073,7 @@ details.wd[open]>summary{background:var(--fill)}
     var introSeg=seg([{v:'once',t:'First time only'},{v:'always',t:'Every time'},{v:'never',t:'Never'}],introAuto,function(v){try{localStorage.setItem('dbIntroAuto',v);}catch(e){}},'Play intro on open');
     sBody.appendChild(section('Intro',h('div',{class:'group'},h('div',{class:'srow'},h('div',{class:'l'},h('b',null,'Play intro on open'),h('small',null,'Remembered on this device.')),introSeg),h('div',{class:'srow'},h('div',{class:'l'},h('b',null,'Replay the intro'),h('small',null,'Plays the opening animation again. Sound needs a tap on a subclass.')),h('button',{type:'button',class:'sbtn',onclick:function(){setTab('builds');introShow();}},'Replay')))));
     if(hasGear()) sBody.appendChild(section('Your data',h('div',{class:'group'},h('div',{class:'srow'},h('div',{class:'l'},h('b',null,'Remove all gear'),h('small',null,'Clears your import and anything you added by hand from this device.')),h('button',{type:'button',class:'sbtn',onclick:function(){try{localStorage.removeItem('dbGear');}catch(e){} S.gear=null; S.gearIdx=null; renderSettings(); paintNudge(); if(S.sel) renderDetail();}},'Remove')))));
-    sBody.appendChild(section('About',h('div',{class:'group'},h('div',{class:'srow'},h('div',{class:'l'},h('b',null,'Destiny Builds Companion'),h('small',null,'Builds come from your group sheet and the creators credited on each build. Element icons are the in-game icons you supplied.'),h('small',null,'Version 2026.10.25b · Bungie profile'))))));
+    sBody.appendChild(section('About',h('div',{class:'group'},h('div',{class:'srow'},h('div',{class:'l'},h('b',null,'Destiny Builds Companion'),h('small',null,'Builds come from your group sheet and the creators credited on each build. Element icons are the in-game icons you supplied.'),h('small',null,'Version 2026.10.25c · Bungie options behind profile'))))));
   }
   /* ---------- Intro (animation + synthesized score, no audio files) ---------- */
   var INTRO_LEN=7.6;
