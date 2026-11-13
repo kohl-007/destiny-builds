@@ -112,6 +112,8 @@ button{font:inherit;color:inherit}
 .ip-body{max-width:760px;margin:0 auto;padding:6px max(16px,env(safe-area-inset-left,0px)) calc(40px + env(safe-area-inset-bottom,0px))}
 @media (min-width:1024px){.ipage{align-items:center;padding:4vh 0}.ip-panel{width:min(780px,calc(100vw - 300px));height:92vh;border-radius:28px;border:1px solid var(--line);box-shadow:var(--glass-shadow);transform:translateY(24px) scale(.98);opacity:0;transition:transform .3s var(--spring),opacity .2s ease}.ipage.on .ip-panel{transform:none;opacity:1}.ip-bar{padding:12px 14px 6px}}
 .dbar.ip-bar .back{display:inline-flex!important}
+.dbar.ip-bar{margin:0}
+.ip-panel{overflow-x:hidden}
 .ip-hero{display:flex;gap:16px;align-items:center;margin:8px 0 16px}
 .ip-ico{flex:none;width:84px;height:84px;border-radius:20px;overflow:hidden;background:var(--fill2);display:grid;place-items:center;box-shadow:inset 0 0 0 1px var(--line)}
 .ip-ico img{width:100%;height:100%;object-fit:cover;display:block}.ip-ico .d{width:18px;height:18px;border-radius:50%}
@@ -2096,7 +2098,7 @@ details.wd[open]>summary{background:var(--fill)}
     var introSeg=seg([{v:'once',t:'First time only'},{v:'always',t:'Every time'},{v:'never',t:'Never'}],introAuto,function(v){try{localStorage.setItem('dbIntroAuto',v);}catch(e){}},'Play intro on open');
     sBody.appendChild(section('Intro',h('div',{class:'group'},h('div',{class:'srow'},h('div',{class:'l'},h('b',null,'Play intro on open'),h('small',null,'Remembered on this device.')),introSeg),h('div',{class:'srow'},h('div',{class:'l'},h('b',null,'Replay the intro'),h('small',null,'Plays the opening animation again. Sound needs a tap on a subclass.')),h('button',{type:'button',class:'sbtn',onclick:function(){setTab('builds');introShow();}},'Replay')))));
     if(hasGear()) sBody.appendChild(section('Your data',h('div',{class:'group'},h('div',{class:'srow'},h('div',{class:'l'},h('b',null,'Remove all gear'),h('small',null,'Clears your import and anything you added by hand from this device.')),h('button',{type:'button',class:'sbtn',onclick:function(){try{localStorage.removeItem('dbGear');}catch(e){} S.gear=null; S.gearIdx=null; renderSettings(); paintNudge(); if(S.sel) renderDetail();}},'Remove')))));
-    sBody.appendChild(section('About',h('div',{class:'group'},h('div',{class:'srow'},h('div',{class:'l'},h('b',null,'Destiny Builds Companion'),h('small',null,'Builds come from your group sheet and the creators credited on each build. Element icons are the in-game icons you supplied.'),h('small',null,'Version 2026.11.12 · perk icons'))))));
+    sBody.appendChild(section('About',h('div',{class:'group'},h('div',{class:'srow'},h('div',{class:'l'},h('b',null,'Destiny Builds Companion'),h('small',null,'Builds come from your group sheet and the creators credited on each build. Element icons are the in-game icons you supplied.'),h('small',null,'Version 2026.11.12b · no sideways scroll'))))));
   }
   /* ---------- Intro (animation + synthesized score, no audio files) ---------- */
   var INTRO_LEN=7.6;
